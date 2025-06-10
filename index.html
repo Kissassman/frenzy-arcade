@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monster Survivors - Play Free Online Game | Frenzy Arcade</title>
-  <meta name="description" content="Play Monster Survivors instantly on Frenzy Arcade. Enjoy a minimal iOS-style experience, no download needed. Discover more top free games soon!">
+  <meta name="description" content="Play Monster Survivors instantly on Frenzy Arcade. Enjoy a minimal iOS-style experience, no download needed. Discover top free games and unlock achievements!">
   <link rel="canonical" href="https://frenzyarcade.com/">
 
   <!-- Open Graph / Facebook -->
@@ -21,24 +21,6 @@
   <meta name="twitter:description" content="Play Monster Survivors instantly on Frenzy Arcade. Enjoy a minimal iOS-style experience, no download needed. Discover more top free games soon!">
   <meta name="twitter:image" content="https://frenzyarcade.com/og-monster-survivors.jpg">
 
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "Monster Survivors",
-    "url": "https://frenzyarcade.com/",
-    "image": "https://frenzyarcade.com/og-monster-survivors.jpg",
-    "description": "Play Monster Survivors instantly on Frenzy Arcade. Enjoy a minimal iOS-style experience, no download needed.",
-    "applicationCategory": "Game",
-    "operatingSystem": "Browser",
-    "author": {
-      "@type": "Organization",
-      "name": "Frenzy Arcade"
-    }
-  }
-  </script>
-
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -46,44 +28,131 @@
       theme: {
         extend: {
           colors: {
-            appleBlue: '#007AFF',
-            appleGray: '#F2F2F7',
-            appleDark: '#1C1C1E',
-            appleGreen: '#34C759',
-            appleYellow: '#FFCC00'
+            arcadePurple: '#2d0036',
+            arcadeNeonGreen: '#39ff14',
+            arcadeNeonYellow: '#ffe600',
+            arcadeNeonRed: '#ff005d',
+            arcadeNeonBlue: '#00eaff',
+            arcadeDark: '#1a0022',
+            arcadeGray: '#2d0036',
           }
         }
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .game-glow { box-shadow: 0 0 32px 0 #007aff33, 0 2px 8px #1c1c1e11; }
-    .ad-placeholder { background: repeating-linear-gradient(135deg, #f2f2f7 0 10px, #e5e5ea 10px 20px); }
-    .section-card { box-shadow: 0 4px 32px 0 #1C1C1E22, 0 1.5px 0 #fff; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #1a0022;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .arcade-bg {
+      position: fixed;
+      z-index: 0;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 30%, #00eaff55 0 120px, transparent 200px),
+        radial-gradient(circle at 80% 70%, #ff005d55 0 120px, transparent 200px),
+        radial-gradient(circle at 60% 20%, #ffe60055 0 100px, transparent 200px),
+        radial-gradient(circle at 40% 80%, #39ff1455 0 100px, transparent 200px),
+        repeating-linear-gradient(135deg, #2d0036 0 40px, #1a0022 40px 80px),
+        repeating-linear-gradient(45deg, #00eaff22 0 2px, transparent 2px 40px);
+      animation: arcade-bg-move 10s linear infinite alternate;
+    }
+    @keyframes arcade-bg-move {
+      0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+      100% { background-position: 40px 40px, -40px -40px, 20px 60px, -20px -60px, 80px 80px, -80px -80px; }
+    }
+    .arcade-dot {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 1;
+      box-shadow: 0 0 16px 8px;
+      animation: dot-flicker 2s infinite alternate;
+    }
+    @keyframes dot-flicker {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    .game-glow {
+      box-shadow: 0 0 32px 0 #39ff1444, 0 2px 8px #00eaff33;
+    }
+    .arcade-border {
+      border: 2px solid #ffe600;
+      box-shadow: 0 0 12px #ff005d, 0 0 32px #00eaff;
+    }
+    .arcade-title {
+      text-shadow: 0 0 8px #39ff14, 0 0 16px #00eaff, 2px 2px 0 #ff005d;
+    }
+    .arcade-btn {
+      background: linear-gradient(90deg, #ff005d 0%, #ffe600 100%);
+      color: #2d0036;
+      font-weight: bold;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #39ff14, 0 0 16px #00eaff;
+      transition: transform 0.1s;
+    }
+    .arcade-btn:active {
+      transform: scale(0.96);
+    }
+    .arcade-achievement {
+      background: linear-gradient(90deg, #00eaff 0%, #39ff14 100%);
+      color: #2d0036;
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin: 2px 0;
+      font-weight: bold;
+      box-shadow: 0 0 8px #ffe600;
+      display: inline-block;
+    }
+    main, header, footer, #nickname-modal {
+      position: relative;
+      z-index: 10;
+    }
+    #game-container {
+      width: 100%;
+      aspect-ratio: 16/9;
+      min-height: 480px;
+      max-width: 100%;
+      background: #111;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #game-iframe {
+      width: 100%!important;
+      height: 100%!important;
+      min-height: 480px;
+      min-width: 100%;
+      border: none;
+      display: block;
+      background: #111;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    /* Ensure modals are above the game */
+    #nickname-modal {
+      z-index: 1000 !important;
+    }
   </style>
 </head>
-<body class="bg-appleGray text-appleDark min-h-screen flex flex-col">
+<body class="text-arcadeNeonGreen min-h-screen flex flex-col">
+  <div class="arcade-bg"></div>
 
-  <!-- 语言切换预留 -->
-  <div class="absolute right-4 top-4 z-50">
-    <select class="bg-white border rounded px-2 py-1 text-sm text-appleDark cursor-not-allowed" disabled>
-      <option>English</option>
-      <!-- <option>中文</option> -->
-    </select>
-  </div>
-
-  <!-- 顶部蓝色导航条 -->
-  <header class="bg-appleBlue shadow-md">
+  <header class="bg-arcadeDark shadow-md arcade-border">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between px-6 py-4">
       <div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Monster Survivors</h1>
-        <p class="text-sm text-white/80 mt-1">Survive and fight against endless waves of monsters!</p>
+        <h1 class="text-2xl sm:text-3xl font-extrabold arcade-title">Monster Survivors</h1>
+        <p class="text-sm text-arcadeNeonBlue mt-1">Survive and fight against endless waves of monsters!</p>
       </div>
-      <nav class="mt-4 sm:mt-0 flex gap-6 text-white font-semibold text-base">
+      <nav class="mt-4 sm:mt-0 flex gap-6 text-arcadeNeonYellow font-semibold text-base">
         <a href="#play" class="hover:underline">Play Now</a>
         <a href="#about" class="hover:underline">About</a>
         <a href="#features" class="hover:underline">Features</a>
@@ -92,95 +161,157 @@
     </div>
   </header>
 
-  <main class="flex-1 flex flex-col items-center px-2 bg-appleGray">
-    <!-- 广告位预留 -->
+  <main class="flex-1 flex flex-col items-center px-2 bg-arcadeGray">
     <div class="w-full max-w-4xl mx-auto mt-6 mb-2">
-      <div class="ad-placeholder rounded-lg h-12 flex items-center justify-center text-appleDark/40 text-sm font-semibold">
+      <div class="ad-placeholder rounded-lg h-12 flex items-center justify-center text-arcadeNeonGreen/40 text-sm font-semibold">
         <!-- Future Ad Slot: Your ad could be here! -->
       </div>
     </div>
 
-    <!-- 游戏区块，参考截图尺寸 -->
+    <!-- GAME SECTION -->
     <section id="play" class="w-full max-w-4xl mx-auto mt-2">
-      <h2 class="text-xl sm:text-2xl font-bold text-appleBlue mb-3">Play Monster Survivors</h2>
-      <div class="rounded-2xl overflow-hidden bg-black game-glow border border-appleGray">
-        <div id="game-container" class="relative w-full" style="padding-bottom:56.25%; min-height:480px; background:#111;">
+      <h2 class="text-xl sm:text-2xl font-bold arcade-title mb-3">Arcade Mode - Monster Survivors</h2>
+      <div class="rounded-2xl overflow-hidden bg-black game-glow arcade-border relative">
+        <div id="game-container">
           <iframe
             id="game-iframe"
             src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html"
-            class="absolute top-0 left-0 w-full h-full"
             allowfullscreen
             scrolling="no"
             title="Monster Survivors Game"
-            loading="lazy">
-          </iframe>
-          <div id="game-fallback" class="hidden absolute inset-0 flex items-center justify-center bg-white/90 text-appleDark text-lg font-bold z-10">
+            loading="eager"
+          ></iframe>
+          <div id="game-fallback" class="hidden absolute inset-0 flex items-center justify-center bg-arcadeDark/90 text-arcadeNeonYellow text-lg font-bold z-10">
             Game is temporarily unavailable.<br>
             Please try again later or check out other games!
           </div>
         </div>
+        <!-- NICKNAME MODAL (over the game area only) -->
+        <div id="nickname-modal" class="fixed inset-0 flex items-center justify-center z-[1000]" style="background:rgba(0,0,0,0.65);">
+          <div class="bg-arcadeGray rounded-xl p-6 shadow-lg w-80 text-center">
+            <h2 class="text-lg font-bold mb-2 text-white">Enter Your Nickname</h2>
+            <input id="nickname-input" type="text" maxlength="16" class="border rounded px-2 py-1 w-full mb-2" placeholder="Type or generate a nickname">
+            <button id="random-nickname" class="bg-arcadeNeonGreen text-arcadeDark px-3 py-1 rounded mb-2">Random</button>
+            <br>
+            <button id="save-nickname" class="bg-arcadeNeonGreen text-arcadeDark px-4 py-1 rounded">Confirm</button>
+          </div>
+        </div>
       </div>
-      <script>
-        // iframe降级检测
-        const iframe = document.getElementById('game-iframe');
-        const fallback = document.getElementById('game-fallback');
-        let loaded = false;
-        iframe.onload = () => { loaded = true; };
-        setTimeout(() => {
-          if (!loaded) fallback.classList.remove('hidden');
-        }, 8000);
-      </script>
     </section>
 
-    <!-- 攻略与更新日志区块 -->
-    <section id="features" class="w-full max-w-4xl mx-auto mt-8 mb-8 bg-white/80 rounded-xl p-6 shadow section-card">
-      <h2 class="text-lg sm:text-xl font-bold text-appleBlue mb-2">Tips & Strategies</h2>
-      <ul class="list-disc pl-5 text-appleDark mb-4">
+    <!-- TIPS & FEATURES -->
+    <section id="features" class="w-full max-w-4xl mx-auto mt-8 mb-8 bg-arcadeGray/80 rounded-xl p-6 shadow arcade-border">
+      <h2 class="text-lg sm:text-xl font-bold arcade-title mb-2">Tips & Strategies</h2>
+      <ul class="list-disc pl-5 text-white mb-4">
+        <li>Use arrow keys or WASD to move, or tap the screen on mobile.</li>
         <li>Keep moving to avoid being surrounded by monsters.</li>
         <li>Prioritize picking up experience gems for faster upgrades.</li>
         <li>Experiment with different upgrade combinations for the best results.</li>
       </ul>
-      <h2 class="text-lg sm:text-xl font-bold text-appleGreen mt-6 mb-2">Update Log</h2>
-      <ul class="list-disc pl-5 text-appleDark">
+      <h2 class="text-lg sm:text-xl font-bold arcade-title mt-6 mb-2">Update Log</h2>
+      <ul class="list-disc pl-5 text-white">
         <li><strong>2024-06-01:</strong> Game launched on FrenzyArcade.com!</li>
         <li><strong>2024-06-10:</strong> Added new power-ups and improved mobile controls.</li>
       </ul>
     </section>
 
-    <!-- 游戏介绍与玩法 -->
-    <section id="about" class="w-full max-w-4xl mx-auto mt-8 mb-8 bg-white/80 rounded-xl p-6 shadow section-card">
-      <h2 class="text-lg sm:text-xl font-bold text-appleBlue mb-2">About Monster Survivors</h2>
-      <p class="mb-4 text-appleDark">
+    <!-- ABOUT -->
+    <section id="about" class="w-full max-w-4xl mx-auto mt-8 mb-8 bg-arcadeGray/80 rounded-xl p-6 shadow arcade-border">
+      <h2 class="text-lg sm:text-xl font-bold arcade-title mb-2">About Monster Survivors</h2>
+      <p class="mb-4 text-white">
         <strong>Monster Survivors</strong> is a fast-paced survival game where you must outlast endless waves of monsters. Collect upgrades, master your movement, and climb the leaderboard! Enjoy a seamless, iOS-inspired experience on both mobile and desktop.
       </p>
-      <ul class="list-disc pl-5 text-appleDark mb-4">
+      <ul class="list-disc pl-5 text-white mb-4">
         <li>Genre: Action, Survival</li>
         <li>Platform: Browser (Mobile & PC)</li>
         <li>Free to play, no registration required</li>
         <li>More top games coming soon!</li>
       </ul>
-      <h2 id="controls" class="text-lg sm:text-xl font-bold text-appleGreen mt-6 mb-2">How to Play</h2>
-      <ol class="list-decimal pl-5 text-appleDark space-y-1">
-        <li>Use your touchscreen or keyboard (WASD/Arrow keys) to move.</li>
-        <li>Your hero attacks automatically—focus on dodging and collecting upgrades.</li>
+      <h2 id="controls" class="text-lg sm:text-xl font-bold arcade-title mt-6 mb-2">How to Play</h2>
+      <ol class="list-decimal pl-5 text-white space-y-1">
+        <li>Use your touchscreen or keyboard (WASD/Arrow keys) to move. On mobile, tap the screen edges to control movement.</li>
+        <li>Your hero attacks automatically – focus on dodging and collecting upgrades.</li>
         <li>Survive as long as possible to set a new high score!</li>
       </ol>
     </section>
 
-    <!-- 排行榜/每日挑战/评论预留区 -->
-    <section class="w-full max-w-4xl mx-auto mb-8">
-      <div class="rounded-lg bg-appleGray/80 border border-appleBlue/20 p-4 text-center text-appleDark/60 text-sm">
-        Leaderboard, daily challenges, and comments coming soon. Stay tuned!
-      </div>
-    </section>
   </main>
 
-  <footer class="bg-white/80 text-center py-4 text-appleGray text-xs border-t border-appleGray/60">
-    &copy; 2024 <a href="https://frenzyarcade.com/" class="text-appleBlue hover:underline">FrenzyArcade.com</a>. All rights reserved.
-    <a href="/privacy.html" class="ml-2 text-appleBlue hover:underline">Privacy Policy</a>
-    <a href="/terms.html" class="ml-2 text-appleBlue hover:underline">Terms</a>
-    <a href="/disclaimer.html" class="ml-2 text-appleBlue hover:underline">Disclaimer</a>
-    <div class="mt-2 text-appleDark/40 text-[11px]">All games are property of their respective owners. FrenzyArcade.com is an aggregator and does not claim ownership of third-party games.</div>
+  <footer class="bg-arcadeGray text-center py-4 text-arcadeNeonGreen text-xs border-t border-arcadeNeonGreen/60">
+    &copy; 2024 <a href="https://frenzyarcade.com/" class="text-arcadeNeonYellow hover:underline">FrenzyArcade.com</a>. All rights reserved.
+    <a href="/privacy.html" class="ml-2 text-arcadeNeonYellow hover:underline">Privacy Policy</a>
+    <a href="/terms.html" class="ml-2 text-arcadeNeonYellow hover:underline">Terms</a>
+    <a href="/disclaimer.html" class="ml-2 text-arcadeNeonYellow hover:underline">Disclaimer</a>
+    <div class="mt-2 text-arcadeNeonGreen/40 text-[11px]">All games are property of their respective owners. FrenzyArcade.com is an aggregator and does not claim ownership of third-party games.</div>
   </footer>
+
+  <script>
+    // Country flag emoji detection
+    let countryFlag = "🌐";
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code) {
+          countryFlag = String.fromCodePoint(...[...data.country_code].map(c=>0x1f1e6+c.charCodeAt(0)-65));
+        }
+      });
+
+    // NICKNAME MODAL LOGIC
+    const modal = document.getElementById('nickname-modal');
+    const input = document.getElementById('nickname-input');
+    const saveBtn = document.getElementById('save-nickname');
+    const randomBtn = document.getElementById('random-nickname');
+
+    function randomName() {
+      const names = ['Hero', 'Hunter', 'Survivor', 'Shadow', 'Blaze', 'Guardian', 'Rogue', 'Adventurer'];
+      return names[Math.floor(Math.random()*names.length)] + Math.floor(Math.random()*1000);
+    }
+
+    randomBtn.onclick = () => {
+      input.value = randomName();
+    };
+
+    saveBtn.onclick = () => {
+      let name = input.value.trim();
+      if (!name) {
+        alert('Please enter a nickname or click Random');
+        return;
+      }
+      localStorage.setItem('nickname', countryFlag + " " + name);
+      modal.style.display = 'none';
+      document.getElementById('game-iframe').style.pointerEvents = 'auto';
+    };
+
+    // Show nickname modal before game interaction
+    window.addEventListener('DOMContentLoaded', function() {
+      if (!localStorage.getItem('nickname')) {
+        modal.style.display = 'flex';
+        document.getElementById('game-iframe').style.pointerEvents = 'none';
+      } else {
+        modal.style.display = 'none';
+        document.getElementById('game-iframe').style.pointerEvents = 'auto';
+      }
+    });
+
+    // Neon dots
+    document.addEventListener('DOMContentLoaded', function() {
+      const bg = document.querySelector('.arcade-bg');
+      if (bg) {
+        for (let i = 0; i < 18; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'arcade-dot';
+          const colors = ['#00eaff', '#ff005d', '#ffe600', '#39ff14', '#fff'];
+          const color = colors[Math.floor(Math.random()*colors.length)];
+          dot.style.background = color;
+          dot.style.boxShadow = `0 0 24px 8px ${color}`;
+          dot.style.width = dot.style.height = `${10+Math.random()*18}px`;
+          dot.style.left = `${Math.random()*100}%`;
+          dot.style.top = `${Math.random()*100}%`;
+          dot.style.animationDelay = `${Math.random()*2}s`;
+          bg.appendChild(dot);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
